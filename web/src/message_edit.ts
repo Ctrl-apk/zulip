@@ -1793,3 +1793,11 @@ export function clear_preview_area($element: JQuery): void {
     $row.find(".preview_content").empty();
     $row.find(".markdown_preview").show();
 }
+export function is_editing_any(): boolean {
+    return currently_editing_messages.size > 0;
+}
+export function cancel_all_edits(): void {
+    for (const id of currently_editing_messages.keys()) {
+        end_message_edit(id);
+    }
+}

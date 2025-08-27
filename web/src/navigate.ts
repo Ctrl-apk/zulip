@@ -4,6 +4,10 @@ import * as message_lists from "./message_lists.ts";
 import * as message_view from "./message_view.ts";
 import * as message_viewport from "./message_viewport.ts";
 import * as unread_ops from "./unread_ops.ts";
+import * as message_edit from "./message_edit.ts";
+
+
+
 
 function go_to_row(msg_id: number): void {
     assert(message_lists.current !== undefined);
@@ -21,6 +25,9 @@ function is_long_message(message_height: number): boolean {
 }
 
 export function up(): void {
+    if (message_edit.is_editing_any()) {
+        message_edit.cancel_all_edits();
+    }
     assert(message_lists.current !== undefined);
     message_viewport.set_last_movement_direction(-1);
 
@@ -59,6 +66,9 @@ export function up(): void {
 }
 
 export function down(with_centering = false): void {
+    if (message_edit.is_editing_any()) {
+        message_edit.cancel_all_edits();
+    }
     assert(message_lists.current !== undefined);
     message_viewport.set_last_movement_direction(1);
 
@@ -99,10 +109,16 @@ export function down(with_centering = false): void {
 }
 
 export function to_home(): void {
+    if (message_edit.is_editing_any()) {
+        message_edit.cancel_all_edits();
+    }
     message_view.fast_track_current_msg_list_to_anchor("oldest");
 }
 
 export function to_end(): void {
+    if (message_edit.is_editing_any()) {
+        message_edit.cancel_all_edits();
+    }
     message_view.fast_track_current_msg_list_to_anchor("newest");
 }
 
