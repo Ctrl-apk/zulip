@@ -19,6 +19,7 @@
             name="default_language"
             class="setting_twenty_four_hour_time prop-element settings_select bootstrap-focus-style"
             data-setting-widget-type="language-setting">
+            <option value="" disabled selected>Search for language…</option>
         {{#each page_params.all_languages}}
             <option value="{{this.code}}">
                 {{this.name}} ({{this.percent_translated}}%)

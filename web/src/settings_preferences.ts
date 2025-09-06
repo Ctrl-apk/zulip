@@ -109,12 +109,12 @@ export function set_up(settings_panel: SettingsPanel): void {
 
         const default_language_dropdown = new DropdownWidget({
             widget_name: "default_language",
-            default_id: settings_object.default_language ?? "",
+            default_id: "search",
             $events_container: $container, // for event handling
             hide_search_box: false,
-                search_placeholder: "Search for language…", // <-- this sets the input placeholder
+            search_placeholder: "Search for language…",
             
-            get_options(search_query?: string) {
+        get_options(search_query?: string) {
         // If the user types, filter by query
         if (!search_query) return language_options;
 
@@ -161,12 +161,6 @@ export function set_up(settings_panel: SettingsPanel): void {
         });
 
         default_language_dropdown.setup();
-
-// If no language is selected, show "Search"
-const language_name = settings_object.default_language ?? "";
-$dropdown_container
-    .find(".dropdown_widget_value")
-    .text(language_name !== "" ? get_language_name(language_name) : "Search");
 
     }
 
